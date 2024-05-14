@@ -1,0 +1,51 @@
+import random
+
+# Funkce pro generování nového kola
+def nove_kolo():
+    global delka_pole
+    global kolo
+    kolo += 1
+    delka_pole = random.randint(5, 10)  # Nově generovaná délka pole pro další kolo
+
+# Generování náhodného počtu kol
+pocet_kol = random.randint(1, 15)
+
+# Generování náhodné délky pole
+delka_pole = random.randint(5, 10)  # Náhodná délka od 5 do 10
+
+# Výpis informací o hře
+print(f"Počet kol: {pocet_kol}")
+print(f"Délka pole je {delka_pole}")
+
+body = 0  # Inicializace bodů
+zivoty = 2  # Počet životů
+
+# Hlavní smyčka programu
+kolo = 1
+while kolo <= pocet_kol and zivoty > 0:
+    print(f"\nKolo {kolo}")
+
+    odpoved = input("Hádej délku pole: ")
+    if odpoved.lower() == "konec":
+        print(f"Konec hry. Celkový počet bodů: {body}")
+        break  # Ukončení programu
+
+    if not odpoved.isdigit():
+        print("Zadejte prosím celé číslo nebo 'konec' pro ukončení programu.")
+        continue  # Pokračovat ve smyčce při neplatném vstupu
+
+    odpoved = int(odpoved)  # Převedení na celé číslo
+    if odpoved == delka_pole:
+        print("Správně!")
+        body += 1  # Přidání bodu za správnou odpověď
+        nove_kolo()  # Generování nového kola po správné odpovědi
+    else:
+        print("Špatně!")
+        zivoty -= 1  # Snížení počtu životů po špatné odpovědi
+        if zivoty == 0:
+            print("Game Over")
+            break  # Ukončení hry po ztrátě životů
+
+# Konec hry
+print(f"Konec hry. Celkový počet bodů: {body}")
+print(f"Výsledné pole: {'[]' * body}")

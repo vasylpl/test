@@ -24,6 +24,8 @@ for kolo in range(1, pocet_kol + 1):
         if odpoved == delka_pole:
             print("spravně!")
             body += 1
+            kolo += 1
+            delka_pole = random.randint(5,10)
             break
         else:
             print("špatně")
